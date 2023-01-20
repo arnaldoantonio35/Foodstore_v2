@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1" >
+
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#3A3A3A"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                >
+
+
+                <Button
+                    android:id="@+id/button_config"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ic_baseline_dehaze_24"
+                    android:paddingRight="8dp"
+                    android:layout_weight="1"
+
+
+                    />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="200"
+
+                >
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+
+                    app:srcCompat="@drawable/foodstore4" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pedido"
+                    android:textSize="13sp"
+                    android:layout_gravity="center"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="#FFFFFF"
+
+                    />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/button_cart"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_gravity="right"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_baseline_home_24"
+                    android:paddingLeft="8dp"
+                    android:layout_marginRight="15dp"
+
+                    />
+
+            </LinearLayout>
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.appcompat.widget.Toolbar
+
+            android:id="@+id/toolbar2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#8C8C8C"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme">
+
+
+            <Button
+                android:id="@+id/button_categorias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="categorias"
+                android:textSize="10sp"
+                android:textColor="#000000"
+                android:layout_marginRight="10dp"
+
+                />
+
+
+            <Button
+                android:id="@+id/button_pedidos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="meus pedidos"
+                android:textSize="10sp"
+                android:textColor="#000000"
+                android:layout_marginRight="10dp"
+
+                />
+
+            <SearchView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bordas_arredondadas"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:queryHint="Pesquisa"
+                android:iconifiedByDefault="false"
+
+
+                />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/mensagem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OBRIGADO POR FAZER O PEDIDO.\n\n  SEU PEDIDO SERÁ ENTREGUE!\n\nBuon appetito."
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginTop="70dp"
+            android:textColor="#000000"
+            android:textStyle="italic"
+
+            />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            app:srcCompat="@drawable/vetor_entregador"
+            android:layout_gravity="center"
+            />
+
+
+    </LinearLayout>
+
+                <Button
+                    android:id="@+id/fazer_outro_pedido"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fazer outro pedido"
+                    android:layout_gravity="center"
+                    android:fontFamily="sans-serif-light"
+                    android:textStyle="bold|italic"
+                    android:textSize="25sp"
+                    android:backgroundTint="#FF0000"
+                    android:layout_marginBottom="25dp"
+
+                    />
+
+
+</LinearLayout>
