@@ -15,8 +15,10 @@
         android:theme="@style/Theme.FoodStoreMaisQueDelivery">
         <activity android:name=".MainActivityTelaEscolha"></activity>
         <activity android:name=".MainActivityTela_Inicial" />
+        <activity android:name=".MainActivityPagamento"/>
         <activity android:name=".MainActivityCarrinho" />
         <activity android:name=".MainActivity">
+
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

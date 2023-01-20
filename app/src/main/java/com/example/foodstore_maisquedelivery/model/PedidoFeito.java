@@ -1,6 +1,8 @@
 package com.example.foodstore_maisquedelivery.model;
 
-public class PedidoFeito {
+import java.io.Serializable;
+
+public class PedidoFeito implements Serializable {
 
     private String id;
     private String img;

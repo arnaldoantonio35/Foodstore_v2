@@ -19,9 +19,6 @@ public class MainActivityTela_Inicial extends AppCompatActivity {
         System.out.println("Tela_escolha_pedidos1");
 
 
-
-
-
         /*
 
 

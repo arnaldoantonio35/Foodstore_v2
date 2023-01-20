@@ -24,6 +24,8 @@ public class PedidoFeitoAdapter extends RecyclerView.Adapter<PedidoFeitoAdapter.
     Context context;
     List<PedidoFeito> listaPedidosfeitos;
 
+    int quant1;
+
     public PedidoFeitoAdapter(Context context, List<PedidoFeito> listaPedidosfeitos){
         this.context = context;
         this.listaPedidosfeitos = listaPedidosfeitos;
@@ -52,16 +54,30 @@ public class PedidoFeitoAdapter extends RecyclerView.Adapter<PedidoFeitoAdapter.
         PedidoFeito pedidoFeito = listaPedidosfeitos.get(position);
 
         holder.nomePedido.setText(pedidoFeito.getName());
-        holder.descricaoPedido.setText(pedidoFeito.getDsc());
-        holder.ratePedido.setText("Avaliação: "+ pedidoFeito.getRate() + " Estrelas");
+        //holder.descricaoPedido.setText(pedidoFeito.getDsc());
+        //holder.ratePedido.setText("Avaliação: "+ pedidoFeito.getRate() + " Estrelas");
+
+        quant1 = pedidoFeito.getQuantidade();
+
+        String quant = String.valueOf(quant1 + quant1);
+
+        holder.quantidadePedido.setText(quant);
 
         String vlr2 = String.valueOf(pedidoFeito.getPrice());
 
+        Double valorItem = pedidoFeito.getPrice() * pedidoFeito.getQuantidade();
+
+        String valorItemString = String.valueOf(valorItem);
+
         holder.valorPedido.setText("R$: " + vlr2);
+
+        holder.valorItemPedido.setText("R$: " + valorItemString);
 
         Glide.with(context).load(listaPedidosfeitos.get(position).getImg()).apply(RequestOptions.centerCropTransform()).into(holder.imagemPedido);
 
-        holder.mCardView.setTag(position);
+        //holder.mCardView.setTag(position);
+
+
 
         System.out.println("Posição: " + position);
 
@@ -115,10 +131,8 @@ public class PedidoFeitoAdapter extends RecyclerView.Adapter<PedidoFeitoAdapter.
         TextView valorPedido;
         TextView quantidadePedido;
         ImageView imagemPedido;
-
-
-
-
+        TextView valorItemPedido;
+        int position;
 
 
 
@@ -133,6 +147,17 @@ public class PedidoFeitoAdapter extends RecyclerView.Adapter<PedidoFeitoAdapter.
             valorPedido = itemView.findViewById(R.id.valor_item_carrinho);
             quantidadePedido = itemView.findViewById(R.id.quant_item_carrinho);
             imagemPedido = itemView.findViewById(R.id.imagem_item_carrinho);
+            valorItemPedido = itemView.findViewById(R.id.valor_total_item);
+
+
+            itemView.findViewById(R.id.botao_mais).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    System.out.println("Botao mais acionado na posicão:" + quant1++);
+
+
+                    }
+            });
 
 
         }

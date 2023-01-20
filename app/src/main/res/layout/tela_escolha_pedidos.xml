@@ -116,12 +116,37 @@
 
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
 
+            >
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_Produto"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Sem conexão, verifique sua internet."
+
+
+
+            />
+
+     </LinearLayout>
+
+
+
+
+
 
 
     </LinearLayout>
@@ -143,7 +168,7 @@
                 android:theme="?attr/actionBarTheme">
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/Botao_fazer_pedido"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="fazer o pedido"
@@ -153,21 +178,35 @@
                     android:backgroundTint="#FF0000"
                     android:drawableLeft="@drawable/ic_baseline_shopping_cart_24"
                     android:paddingLeft="8dp"
-
+                    android:onClick="telaCarrinho"
 
 
                     />
 
-                <Button
-                    android:id="@+id/button6"
+                <TextView
+                    android:id="@+id/Qtd_itens"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
-                    android:text="enviar teste"
+                    android:text=""
                     android:backgroundTint="#FF0000"
-                    android:onClick="enviarValor"
+
 
                     />
+
+                <TextView
+                    android:id="@+id/Qtd_valor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginStart="40dp"
+                    android:text=""
+                    android:backgroundTint="#FF0000"
+
+
+                    />
+
+
 
 
 

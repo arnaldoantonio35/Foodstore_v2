@@ -143,35 +143,11 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-        <TextView
-            android:id="@+id/valor_nome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="nome"
-            android:gravity="center"
-            android:layout_gravity="center"
 
-            android:textSize="10dp"
 
-            />
 
-        <TextView
-            android:id="@+id/valor_valor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="idade"
-            android:gravity="center"
-            android:textSize="10dp"
-            />
 
-        <TextView
-            android:id="@+id/email_valor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="email"
-            android:gravity="center"
-            android:textSize="10dp"
-            />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/RecyclerView_carrinho"
@@ -182,16 +158,17 @@
     </LinearLayout>
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/botao_Pagar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="PAGAR R$: NULL"
+                    android:text="PAGAR R$: 0"
                     android:layout_gravity="center"
                     android:fontFamily="sans-serif-light"
                     android:textStyle="bold|italic"
                     android:textSize="30sp"
                     android:backgroundTint="#FF0000"
-                    android:layout_marginBottom="25dp"
+                    android:layout_marginBottom="5dp"
+                    android:onClick="telaPagamento"
 
                     />
 

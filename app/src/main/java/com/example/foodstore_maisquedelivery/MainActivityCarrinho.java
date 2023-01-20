@@ -29,6 +29,9 @@ public class MainActivityCarrinho extends AppCompatActivity {
     private String nomeTexto;
 
 
+    private TextView valorBotaoTotal;
+
+
     RecyclerView recyclerPedidos;
 
     private List<Produto> produtos = new ArrayList<>();
@@ -37,14 +40,22 @@ public class MainActivityCarrinho extends AppCompatActivity {
 
     private PedidoFeitoAdapter pedidoFeitoAdapter;
 
+    double valorTotal;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tela_carrinho);
 
+
         /////////////////////////////////////////////////////
 
-        listaPedidosfeitos = new ArrayList<>();
+        System.out.println("Lista de pedidos: " + (ArrayList<PedidoFeito>) getIntent().getSerializableExtra("pedidos"));
+
+        listaPedidosfeitos = (ArrayList<PedidoFeito>) getIntent().getSerializableExtra("pedidos");
+
+
         recyclerPedidos = (RecyclerView)findViewById(R.id.RecyclerView_carrinho);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 
@@ -52,7 +63,7 @@ public class MainActivityCarrinho extends AppCompatActivity {
         pedidoFeitoAdapter = new PedidoFeitoAdapter(getApplicationContext(),listaPedidosfeitos);
         recyclerPedidos.setAdapter(pedidoFeitoAdapter);
 
-        pedidoFeitoAdapter.setListaPedidosfeitos(listaPedidosfeitos);
+        //pedidoFeitoAdapter.setListaPedidosfeitos(listaPedidosfeitos);
 
         System.out.println("Size lista: " + listaPedidosfeitos.size());
 
@@ -63,20 +74,22 @@ public class MainActivityCarrinho extends AppCompatActivity {
 
             System.out.println("Id: " + pedidoFeito.getId());
 
+
                         /*
-
                         System.out.println("Numero: " + i);
-                        System.out.println("\nNome: " + comida.getName());
+                        System.out.println("\nNome: " + pedidoFeito.getName());
 
-                        nomeTexto = comida.getName();
+                        nomeTexto = pedidoFeito.getName();
 
-                        System.out.println("Id: " + comida.getId());
-                        System.out.println("Desc: " + comida.getDsc());
-                        System.out.println("Preço: " + comida.getPrice());
-                        System.out.println("Rate: " + comida.getRate());
-                        System.out.println("Imagem: " + comida.getImg());
+                        System.out.println("Id: " + pedidoFeito.getId());
+                        System.out.println("Desc: " + pedidoFeito.getDsc());
+                        System.out.println("Preço: " + pedidoFeito.getPrice());
+                        System.out.println("Rate: " + pedidoFeito.getRate());
+                        System.out.println("Imagem: " + pedidoFeito.getImg());
 
                          */
+
+
 
 
 
@@ -90,20 +103,34 @@ public class MainActivityCarrinho extends AppCompatActivity {
 
 
         //////////////////////////////////////////////
-        textNome = findViewById(R.id.valor_nome);
-        textIdade = findViewById(R.id.valor_valor);
-        textEmail = findViewById(R.id.email_valor);
+        //textNome = findViewById(R.id.valor_nome);
+        //textIdade = findViewById(R.id.valor_valor);
+        //textEmail = findViewById(R.id.email_valor);
+
+        valorBotaoTotal = findViewById(R.id.botao_Pagar);
 
 
         //recuperar os valores na proxima tela(activity)
 
         Bundle dados = getIntent().getExtras();
 
+        valorTotal = dados.getDouble("valorTotal");
+
+        System.out.println("valor total carrinho: " + valorTotal);
+
+        valorBotaoTotal.setText("PAGAR R$: "+ valorTotal);
+
         //String nome = dados.getString("nome");
         //int idade = dados.getInt("idade");
 
 
+
+
+        //valorBotaoTotal.setText(valorTotal);
+
         //Usuario usuario = (Usuario) dados.getSerializable("objeto");
+
+
 
         //configurar valores
 
@@ -123,76 +150,34 @@ public class MainActivityCarrinho extends AppCompatActivity {
 
     public void inicioHome(View view){
 
-        Intent intent = new Intent(this, MainActivityTelaEscolha.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
+        finish();
+
+    }
+
+    public void telaPagamento(View view){
+
+        System.out.println("Entrou no metodo tela pagamento");
+
+        Intent intent = new Intent(this, MainActivityPagamento.class);
+
         startActivity(intent);
-    }
-
-
-    public void prepararProdutos(){
-
-
-        /*
-        Postagem p = new Postagem("Arnaldo Antônio @arnaldowiski", "Olha a cara dessse FDP kkkkjkk", R.drawable.after_cookie, 2, index++);
-        this.postagens.add(p);
-        p = new Postagem("Matheus Falcão @m.falcaoum", "Mizinga", R.drawable.imagem1, 3, index++);
-        this.postagens.add(p);
-        p = new Postagem("Felipe Melo @felipe.melo", "Do nada, Dubai", R.drawable.imagem2, 7, index++);
-        this.postagens.add(p);
-        p = new Postagem("Humberto Escorel @Uberto", "Obrigado Hotmart kkkk", R.drawable.imagem3, 4, index++);
-        this.postagens.add(p);
-
-         */
-
-
-        //ProdutoAdapterBBQS g = new ProdutoAdapterBBQS(listaPostagensBbqs);
-        //this.listaPostagensBbqs.add(g);
-
-        //g = new ProdutoAdapterBBQS("", "" )
-
-        System.out.println("Nome texto: " + nomeTexto);
-
-        PedidoFeito p = new PedidoFeito("id","R.drawable.burger_loader","Nome","descri",19.90,"6",1);
-        //this.listaPedidosfeitos(p);
-
-        //Produto p = new PedidoFeito("id","R.drawable.burger_loader","Nome","descri",19.90,"6",1);
-        //this.listaPedidosfeitos.add(p);
-
-        System.out.println("Oq tem em produto p: " + p);
-
-        /*
-
-        Produto p = new Produto("Comida 1 xxxx","Descrição xxxxxxDescrição xxxxxx Descrição xxxxxx","Rate: 5","R$: 19,40",1, R.drawable.burger_loader);
-        this.produtos.add(p);
-
-        p = new Produto("Comida 2 xxxx","Descrição xxxxxxDescrição xxxxxx Descrição xxxxxx","Rate: 4","R$: 29,40",1, R.drawable.burger_loader);
-        this.produtos.add(p);
-
-        p = new Produto("Comida 3 xxxx","Descrição xxxxxxDescrição xxxxxx Descrição xxxxxx","Rate: 5","R$: 39,40",1, R.drawable.burger_loader);
-        this.produtos.add(p);
-
-        p = new Produto("Comida 4 xxxx","Descrição xxxxxxDescrição xxxxxx Descrição xxxxxx","Rate: 3","R$: 49,40",1, R.drawable.burger_loader);
-        this.produtos.add(p);
-
-        p = new Produto("Comida 5 xxxx","Descrição xxxxxxDescrição xxxxxx Descrição xxxxxx","Rate: 2","R$: 12,50",1, R.drawable.burger_loader);
-        this.produtos.add(p);
-
-        p = new Produto("Comida 6 xxxx","Descrição xxxxxxDescrição xxxxxx Descrição xxxxxx","Rate: 5","R$: 30,40",1, R.drawable.burger_loader);
-        this.produtos.add(p);
-
-        p = new Produto("Comida 7 xxxx","Descrição xxxxxxDescrição xxxxxx Descrição xxxxxx","Rate: 4","R$: 9,90",1, R.drawable.burger_loader);
-        this.produtos.add(p);
-
-        p = new Produto("Comida 8 xxxx","Descrição xxxxxxDescrição xxxxxx Descrição xxxxxx","Rate: 6","R$: 60,00",1, R.drawable.burger_loader);
-        this.produtos.add(p);
-
-        p = new Produto("Comida 9 xxxx","Descrição xxxxxxDescrição xxxxxx Descrição xxxxxx","Rate: 9","R$: 40,40",1, R.drawable.burger_loader);
-        this.produtos.add(p);
-
-         */
-
 
     }
+
+    /*
+
+    public void chamaValorTotal(){
+
+        TextView pagarValor = findViewById(R.id.botao_Pagar);
+
+        pagarValor.setText("PAGAR R$: "+ valorTotal);
+
+    }
+
+     */
+
+
 
 
 

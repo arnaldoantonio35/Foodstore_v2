@@ -59,6 +59,7 @@ public class ProdutoAdapterComida extends RecyclerView.Adapter<ProdutoAdapterCom
         holder.descricaoProduto.setText(comida.getDsc());
         holder.rateProduto.setText("Avaliação: "+ comida.getRate() + " Estrelas");
 
+
         String vlr = String.valueOf(comida.getPrice());
 
         holder.valorProduto.setText("R$: " + vlr);

@@ -75,7 +75,7 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
     private List<Produto> produtos = new ArrayList<>();
     private List<PostagemBBQS> listaPostagensBbqs = new ArrayList<>();
     private List<Comidas> listaComidas;
-    private List<PedidoFeito> listaPedidosfeitos;
+    private ArrayList<PedidoFeito> listaPedidosfeitos = new ArrayList<>();
 
     private ProdutoAdapterComida produtoAdapterComida;
 
@@ -84,6 +84,8 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
     private String nomeTexto;
 
     private int ItemSelecionado;
+
+    double valorTotal;
 
     ImageView imagemAlert;
     TextView textoNomeItemAlert;
@@ -154,17 +156,24 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
                     }
 
                 }
+
             }
 
             @Override
             public void onFailure(Call<List <Comidas>> call, Throwable t) {
                 Log.d("TAG","Response = "+t.toString());
                 System.out.println("API sem resposta... checar a rede.");
+
+               chamaTextSemRede();
+
             }
+
+
         });
 
 
-        ///////////////////////////////////////////////////////////////////////// MultiSelect
+
+       ///////////////////////////////////////////////////////////////////////// MultiSelect
 
 
 
@@ -400,7 +409,6 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         System.out.println("Sim acionado");
-                        //Toast.makeText(getApplicationContext(), "Executar ação ao clicar no SIM", Toast.LENGTH_SHORT).show();
 
                         //mandar o atributos para a lista de pedidos feitos (carrinho).
 
@@ -416,7 +424,6 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
                                                             comidasSelecionada.getRate(),1);
 
 
-                        
 
                         pedido.setId(comidasSelecionada.getId());
                         pedido.setImg(comidasSelecionada.getImg());
@@ -426,23 +433,30 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
                         //pedido.setQuantidade(comidasSelecionada.get);
 
 
-
-                        //System.out.println("tamanho pedidos: " + pedidoFeito);
-                        //System.out.println("Tamanho lista" + listaPedidosfeitos.size());
-
-                        //pedido.setName(name);
-
-                        //pedidoFeito.setName(String.valueOf(name));
-
-
-
                         System.out.println("Pedido selecionado: " + pedido.getName() +"\n"
                                                                   + pedido.getDsc() +"\n"
                                                                   + pedido.getPrice() + "\n"
                                                                 + pedido.getId() + "\n"
                         );
 
+                        double aux = comidasSelecionada.getPrice();
+
+                        //add
+
+                        System.out.println("Valor total: " + valorTotal);
+
+                        listaPedidosfeitos.add(pedido);
+
                         System.out.println("tamanho lista pedidos: " + pedido);
+
+
+                        System.out.println("Size lista main: " + listaPedidosfeitos.size());
+
+                        int tamanho = listaPedidosfeitos.size();
+
+                        chamaQuantidade(tamanho);
+
+                        enviaValorTotal(aux);
 
 
                         Toast.makeText(view.getContext(),"item "+ Integer.toString(position) + " - "+ comidasSelecionada.getName() + " - Adicionado no carrinho.", Toast.LENGTH_SHORT).show();
@@ -582,7 +596,20 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
 
     }
 
+    private void chamaTextSemRede(){
+
+        TextView textview = findViewById(R.id.recycler_Produto);
+
+        LinearLayout.LayoutParams esconderTextView = (LinearLayout.LayoutParams) textview.getLayoutParams();
+
+        esconderTextView.weight = 1;
+        textview.setLayoutParams(esconderTextView);
+
+    }
+
     public void pepararPedidos(){
+
+        /*
 
         PedidoFeito comidasSelecionada = new PedidoFeito("""""")
 
@@ -591,6 +618,8 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
 
         p = new PedidoFeito("id", "img",comidasSelecionada.getName(),comidasSelecionada.getDsc(),comidasSelecionada.getPrice(),comidasSelecionada.getRate(),1);
         this.postagens.add(p);
+
+         */
 
 
 
@@ -671,7 +700,12 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
     public void telaCarrinho(View view){
 
         Intent intent = new Intent(this, MainActivityCarrinho.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+       //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
+        intent.putExtra("pedidos",listaPedidosfeitos);
+
+        intent.putExtra("valorTotal",valorTotal);
+
         startActivity(intent);
     }
 
@@ -700,8 +734,32 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
 
     }
 
+    public void chamaQuantidade(int tamanho){
+
+        TextView qtsPedidos = findViewById(R.id.Qtd_itens);
+
+        if(tamanho <= 1){
+            qtsPedidos.setText(tamanho  +"  Item add\nNo carrinho");
+        }else {
+            qtsPedidos.setText(tamanho + "  Itens add\nNo carrinho");
+        }
+
+    }
+
+    public  void enviaValorTotal(double aux){
+
+        valorTotal = valorTotal + aux;
+
+        TextView valorPedidos = findViewById(R.id.Qtd_valor);
+
+        valorPedidos.setText("TOTAL: \nR$: " + valorTotal);
+
+        Intent intent = new Intent(this, MainActivityCarrinho.class);
+
+        intent.putExtra("nome","Arnaldo A.");
 
 
+    }
 
 
 

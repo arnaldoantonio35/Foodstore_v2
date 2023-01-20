@@ -77,7 +77,7 @@
 
                 <Button
 
-                    android:id="@+id/button5"
+                    android:id="@+id/botao_menos"
                     android:layout_width="39dp"
                     android:layout_height="39dp"
                     android:textStyle="bold"
@@ -103,7 +103,7 @@
                     />
 
                 <Button
-                    android:id="@+id/button4"
+                    android:id="@+id/botao_mais"
                     android:layout_width="39dp"
                     android:layout_height="39dp"
                     android:textStyle="bold"
@@ -154,7 +154,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/valor_total"
+                    android:id="@+id/valor_total_item"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:layout_weight="1"
