@@ -1,6 +1,8 @@
 package com.example.foodstore_maisquedelivery.adapter;
 
 import android.content.Context;
+import android.icu.text.DecimalFormat;
+import android.icu.text.Transliterator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,14 @@ import com.example.foodstore_maisquedelivery.model.PedidoFeito;
 import java.util.List;
 
 public class PedidoFeitoAdapter extends RecyclerView.Adapter<PedidoFeitoAdapter.MyViewHolder>{
+
+    int quantidade;
+    int quantidadeNegativa;
+
+    int PosicaoAnterior;
+    int PosicaoAtual;
+    int NovaPosicao;
+    int buffer;
 
     Context context;
     List<PedidoFeito> listaPedidosfeitos;
@@ -43,6 +53,7 @@ public class PedidoFeitoAdapter extends RecyclerView.Adapter<PedidoFeitoAdapter.
         View view = LayoutInflater.from(context).inflate(R.layout.item_view_carrinho,parent,false);
         System.out.println("Itens na lista: " + viewType);
 
+
         return new PedidoFeitoAdapter.MyViewHolder(view);
 
     }
@@ -59,23 +70,38 @@ public class PedidoFeitoAdapter extends RecyclerView.Adapter<PedidoFeitoAdapter.
 
         quant1 = pedidoFeito.getQuantidade();
 
-        String quant = String.valueOf(quant1 + quant1);
+        String quant = String.valueOf(quant1);
+
+        pedidoFeito.setQuantidade(quant1);
+
+        System.out.println("Quantidade: "+ pedidoFeito.getQuantidade() +" na posição: " + position);
 
         holder.quantidadePedido.setText(quant);
+
 
         String vlr2 = String.valueOf(pedidoFeito.getPrice());
 
         Double valorItem = pedidoFeito.getPrice() * pedidoFeito.getQuantidade();
 
-        String valorItemString = String.valueOf(valorItem);
+        DecimalFormat df = new DecimalFormat("0.00"); //deixar com duas casas decimais
+
+        String valorItemString = String.valueOf(df.format(valorItem));
 
         holder.valorPedido.setText("R$: " + vlr2);
+
+
+
+        pedidoFeito.setPriceTotal(valorItem);
+
+        System.out.println("Valor total Price: " + pedidoFeito.getPriceTotal());
 
         holder.valorItemPedido.setText("R$: " + valorItemString);
 
         Glide.with(context).load(listaPedidosfeitos.get(position).getImg()).apply(RequestOptions.centerCropTransform()).into(holder.imagemPedido);
 
-        //holder.mCardView.setTag(position);
+        holder.mCardView.setTag(position);
+
+        holder.position = position;
 
 
 
@@ -123,7 +149,6 @@ public class PedidoFeitoAdapter extends RecyclerView.Adapter<PedidoFeitoAdapter.
     public class MyViewHolder extends RecyclerView.ViewHolder{
         public CardView mCardView;
 
-        private Button botaoLike;
 
         TextView nomePedido;
         TextView descricaoPedido;
@@ -137,9 +162,11 @@ public class PedidoFeitoAdapter extends RecyclerView.Adapter<PedidoFeitoAdapter.
 
 
         public MyViewHolder(View itemView) {
+
             super(itemView);
 
-            mCardView = (CardView) itemView.findViewById(R.id.card_view);
+
+            mCardView = (CardView) itemView.findViewById(R.id.card_view_carrinho);
 
             nomePedido = itemView.findViewById(R.id.nome_item_carrinho);
             //descricaoPedido = itemView.findViewById(R.id.);
@@ -149,18 +176,70 @@ public class PedidoFeitoAdapter extends RecyclerView.Adapter<PedidoFeitoAdapter.
             imagemPedido = itemView.findViewById(R.id.imagem_item_carrinho);
             valorItemPedido = itemView.findViewById(R.id.valor_total_item);
 
+            quantidade = position;
+
 
             itemView.findViewById(R.id.botao_mais).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    System.out.println("Botao mais acionado na posicão:" + quant1++);
+
+                    PedidoFeito pedidoFeito = listaPedidosfeitos.get(position);
+
+                    pedidoFeito.setAdicionaItem(1);
+
+                    /*
+
+                    if(pedidoFeito.getQuantidade() == 1){
+                        quantidade = 2;
+                    }
+
+                    if(position != buffer) {
+                        quantidade = 0;
+                        if(quantidade == 0 )
+                            quantidade++;
+                    }
+
+                    if(quantidade < 0){
+                        quantidade = 0;
+                    }
+
+                    System.out.println("quantidade:" + quantidade);
+
+                    pedidoFeito.setQuantidade(quantidade++);
+
+                        System.out.println("Botao mais acionado na posicão: " + position + " Valor: " + listaPedidosfeitos.get(position).getQuantidade());
+
+                    buffer = position;
+
+                     */
+                    notifyDataSetChanged();
 
 
                     }
+
+
+
+
             });
+
+            itemView.findViewById(R.id.botao_menos).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    PedidoFeito pedidoFeito = listaPedidosfeitos.get(position);
+
+                    pedidoFeito.setSubtraiItem(1);
+
+                    notifyDataSetChanged();
+                }
+
+
+            });
+
 
 
         }
     }
+
 
 }

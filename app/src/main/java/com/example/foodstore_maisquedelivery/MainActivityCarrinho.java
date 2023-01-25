@@ -1,5 +1,6 @@
 package com.example.foodstore_maisquedelivery;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,11 +8,13 @@ import android.widget.TextView;
 
 //import com.example.foodstore_maisquedelivery.adapter.PedidoFeitoAdapter;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodstore_maisquedelivery.adapter.PedidoFeitoAdapter;
+import com.example.foodstore_maisquedelivery.adapter.PedidoFeitoAdapter.MyViewHolder;
 import com.example.foodstore_maisquedelivery.adapter.ProdutoAdapterComida;
 import com.example.foodstore_maisquedelivery.model.Comidas;
 import com.example.foodstore_maisquedelivery.model.PedidoFeito;
@@ -40,6 +43,7 @@ public class MainActivityCarrinho extends AppCompatActivity {
 
     private PedidoFeitoAdapter pedidoFeitoAdapter;
 
+
     double valorTotal;
 
 
@@ -56,11 +60,11 @@ public class MainActivityCarrinho extends AppCompatActivity {
         listaPedidosfeitos = (ArrayList<PedidoFeito>) getIntent().getSerializableExtra("pedidos");
 
 
-        recyclerPedidos = (RecyclerView)findViewById(R.id.RecyclerView_carrinho);
+        recyclerPedidos = (RecyclerView) findViewById(R.id.RecyclerView_carrinho);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 
         recyclerPedidos.setLayoutManager(layoutManager);
-        pedidoFeitoAdapter = new PedidoFeitoAdapter(getApplicationContext(),listaPedidosfeitos);
+        pedidoFeitoAdapter = new PedidoFeitoAdapter(getApplicationContext(), listaPedidosfeitos);
         recyclerPedidos.setAdapter(pedidoFeitoAdapter);
 
         //pedidoFeitoAdapter.setListaPedidosfeitos(listaPedidosfeitos);
@@ -90,10 +94,6 @@ public class MainActivityCarrinho extends AppCompatActivity {
                          */
 
 
-
-
-
-
             //System.out.println(postagemBBQS.getId());
 
             //System.out.println("Produto: "+ p);
@@ -101,16 +101,25 @@ public class MainActivityCarrinho extends AppCompatActivity {
         }
 
 
-
         //////////////////////////////////////////////
         //textNome = findViewById(R.id.valor_nome);
         //textIdade = findViewById(R.id.valor_valor);
         //textEmail = findViewById(R.id.email_valor);
 
+
+
         valorBotaoTotal = findViewById(R.id.botao_Pagar);
 
 
         //recuperar os valores na proxima tela(activity)
+
+        //PedidoFeito pedidoFeito = (PedidoFeito) listaPedidosfeitos;
+
+        //pedidoFeito.getPriceTotal();
+
+        //System.out.println("PEDIDO TOTAL: " + pedidoFeito.getPriceTotal());
+
+
 
         Bundle dados = getIntent().getExtras();
 
@@ -118,18 +127,17 @@ public class MainActivityCarrinho extends AppCompatActivity {
 
         System.out.println("valor total carrinho: " + valorTotal);
 
-        valorBotaoTotal.setText("PAGAR R$: "+ valorTotal);
+        valorBotaoTotal.setText("PAGAR R$: " + valorTotal);
+
+        //valorBotaoTotal.setText("PAGAR R$: " + pedidoFeito.getPriceTotal());
 
         //String nome = dados.getString("nome");
         //int idade = dados.getInt("idade");
 
 
-
-
         //valorBotaoTotal.setText(valorTotal);
 
         //Usuario usuario = (Usuario) dados.getSerializable("objeto");
-
 
 
         //configurar valores
@@ -145,8 +153,9 @@ public class MainActivityCarrinho extends AppCompatActivity {
         //textIdade.setText(usuario.getIdade());
 
 
-
     }
+
+
 
     public void inicioHome(View view){
 
@@ -164,6 +173,8 @@ public class MainActivityCarrinho extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+
 
     /*
 

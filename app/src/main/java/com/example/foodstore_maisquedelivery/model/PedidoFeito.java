@@ -10,10 +10,14 @@ public class PedidoFeito implements Serializable {
     private String dsc;
     private double price;
     private String rate;
+
     private int quantidade;
+    private int adicionaItem;
+    private int subtraiItem;
+    private double priceTotal;
 
 
-    public PedidoFeito(String id, String img, String name, String dsc, double price, String rate, int quantidade) {
+    public PedidoFeito(String id, String img, String name, String dsc, double price, String rate, int quantidade, int adicionaItem, int subtraiItem, double priceTotal) {
         this.id = id;
         this.img = img;
         this.name = name;
@@ -21,6 +25,9 @@ public class PedidoFeito implements Serializable {
         this.price = price;
         this.rate = rate;
         this.quantidade = quantidade;
+        this.adicionaItem = adicionaItem;
+        this.subtraiItem = subtraiItem;
+        this.priceTotal = priceTotal;
     }
 
     public String getId() {
@@ -78,4 +85,34 @@ public class PedidoFeito implements Serializable {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
+
+    public int getAdicionaItem() { return adicionaItem; }
+
+    public void setAdicionaItem(int adicionaItem) {
+        this.adicionaItem = adicionaItem;
+        setQuantidade(getQuantidade() + 1 );
+    }
+    public int getSubtraiItem() { return subtraiItem; }
+
+    public void setSubtraiItem(int subtraiItem) {
+        this.subtraiItem = subtraiItem;
+        setQuantidade(getQuantidade() - 1);
+
+        if(getQuantidade() < 0){
+            setQuantidade(0);
+        }
+    }
+
+    public double getPriceTotal() { return priceTotal; }
+
+    public void setPriceTotal(double priceTotal) {
+        this.priceTotal = priceTotal;
+
+        priceTotal = getQuantidade() * getPrice();
+
+    }
+
+
+
+
 }

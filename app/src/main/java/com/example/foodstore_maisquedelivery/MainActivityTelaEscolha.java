@@ -51,6 +51,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.app.ProgressDialog.show;
+import static android.content.DialogInterface.BUTTON_POSITIVE;
 import static java.sql.DriverManager.println;
 
 public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
@@ -87,6 +88,8 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
 
     double valorTotal;
 
+    int listaAPI;
+
     ImageView imagemAlert;
     TextView textoNomeItemAlert;
 
@@ -107,7 +110,13 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
         recyclerProduto.setAdapter(produtoAdapterComida);
 
         ApiService apiService = ApiCliente.getClient().create(ApiService.class);
+
         Call<List<Comidas>> call = apiService.getComidas();
+        //Call<List<Comidas>> call = apiService.getIceCream();
+        //Call<List<Comidas>> call2 = apiService.getBbqs();
+        //Call<List<Comidas>> call3 = apiService.getBurgers();
+
+        //call.equals(apiService.getIceCream());
 
         call.enqueue(new Callback<List<Comidas>>() {
 
@@ -385,25 +394,22 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
 
         alertadd.setMessage(comidasSelecionada.getName() + "\n" +
                             comidasSelecionada.getDsc() + "\n\n" +
-                            comidasSelecionada.getRate() + "\n\n" +
-                            "R$: "+comidasSelecionada.getPrice());
+                            "Este item é " + comidasSelecionada.getRate() + " estrelas"+ "\n\n" +
+                            "R$: "+comidasSelecionada.getPrice() +"\n\n" +
+                            "Deseja adicionar o item no carrinho?"
+
+        );
 
 
         //PedidoFeito pedidoFeito = .setName(comidasSelecionada.getName());
         //System.out.println(pedidoFeito.getName());
 
-
-
+        /*
         LayoutInflater factory = LayoutInflater.from(this);
         final View view = factory.inflate(R.layout.item_view_carrinho, null);
         alertadd.setView(view);
 
-        alertadd.setNeutralButton("Voltar", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dlg, int sumthin) {
-
-
-            }
-        });
+         */
 
         alertadd.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
                     @Override
@@ -421,7 +427,7 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
                                                             comidasSelecionada.getName(),
                                                             comidasSelecionada.getDsc(),
                                                             comidasSelecionada.getPrice(),
-                                                            comidasSelecionada.getRate(),1);
+                                                            comidasSelecionada.getRate(),1, 0, 0, 0);
 
 
 
@@ -458,8 +464,9 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
 
                         enviaValorTotal(aux);
 
-
-                        Toast.makeText(view.getContext(),"item "+ Integer.toString(position) + " - "+ comidasSelecionada.getName() + " - Adicionado no carrinho.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"item "+ Integer.toString(position) + " - "+ comidasSelecionada.getName() + " - Adicionado no carrinho.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "O seu item foi adicionado, você pode escolher a quantidade no carrinho - uhuuu!", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(view.getContext(),"item "+ Integer.toString(position) + " - "+ comidasSelecionada.getName() + " - Adicionado no carrinho.", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -468,13 +475,16 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 System.out.println("Não acionado");
-                Toast.makeText(getApplicationContext(), "Não irá executar nada", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getApplicationContext(), "Tudo bem, escolha outro item!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Se desejar, toque no botão ''CATEGORIAS'' e escolha uma delicia especifica :)", Toast.LENGTH_LONG).show();
 
             }
         });
 
+
         alertadd.show();
+        //alertadd.setPositiveButton(AlertDialog.BUTTON_POSITIVE).setTextColor();
+
 
 
     }
@@ -540,61 +550,6 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
     }
 
 
-    private void recuperarListaBBQS(){
-
-
-        FoodsService foodsService = retrofit.create(FoodsService.class);
-        //Call<List<PostagemBBQS>> call = foodsService.recuperarOurFoods();
-        Call<List<PostagemBBQS>> call = foodsService.recuperarIceCream();
-
-        call.enqueue(new Callback<List<PostagemBBQS>>(){
-
-            @Override
-            public void onResponse(Call<List<PostagemBBQS>> call, Response<List<PostagemBBQS>> response) {
-                if(response.isSuccessful()){
-                    listaPostagensBbqs = response.body();
-
-                    //implementação das BBQS via activity main
-
-                    for(int i = 0; i < listaPostagensBbqs.size(); i++){
-                        PostagemBBQS postagemBBQS = listaPostagensBbqs.get(i);
-                        //Log.d("resultado", "onResponse: " + postagemBBQS.getId() + "\n" + postagemBBQS.getName());
-
-
-                        /*
-
-                        System.out.println("Numero: " + i);
-                        System.out.println("\nNome: " + postagemBBQS.getName());
-                        System.out.println("Id: " + postagemBBQS.getId());
-                        System.out.println("Desc: " + postagemBBQS.getDsc());
-                        System.out.println("Preço: " + postagemBBQS.getPrice());
-                        System.out.println("Rate: " + postagemBBQS.getRate());
-                        System.out.println("Imagem: " + postagemBBQS.getImg());
-
-
-                         */
-
-
-                        //System.out.println(postagemBBQS.getId());
-
-                        //System.out.println("Produto: "+ p);
-
-                    }
-
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<List<PostagemBBQS>> call, Throwable t) {
-                System.out.println("Falhou no onFailure do BBQS");
-                System.out.println("erro" + t);
-            }
-        });
-
-
-
-    }
 
     private void chamaTextSemRede(){
 
@@ -625,70 +580,6 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
 
 
     }
-
-
-    public void prepararProdutos(){
-
-
-        /*
-        Postagem p = new Postagem("Arnaldo Antônio @arnaldowiski", "Olha a cara dessse FDP kkkkjkk", R.drawable.after_cookie, 2, index++);
-        this.postagens.add(p);
-        p = new Postagem("Matheus Falcão @m.falcaoum", "Mizinga", R.drawable.imagem1, 3, index++);
-        this.postagens.add(p);
-        p = new Postagem("Felipe Melo @felipe.melo", "Do nada, Dubai", R.drawable.imagem2, 7, index++);
-        this.postagens.add(p);
-        p = new Postagem("Humberto Escorel @Uberto", "Obrigado Hotmart kkkk", R.drawable.imagem3, 4, index++);
-        this.postagens.add(p);
-
-         */
-
-
-        //ProdutoAdapterBBQS g = new ProdutoAdapterBBQS(listaPostagensBbqs);
-        //this.listaPostagensBbqs.add(g);
-
-        //g = new ProdutoAdapterBBQS("", "" )
-
-        System.out.println("Nome texto: " + nomeTexto);
-
-        Produto p = new Produto(nomeTexto,"Descrição xxxxxxDescrição xxxxxx Descrição xxxxxx","Rate: 5","R$: 19,40",1, R.drawable.burger_loader);
-        this.produtos.add(p);
-
-        System.out.println("Oq tem em produto p: " + p);
-
-        /*
-
-        Produto p = new Produto("Comida 1 xxxx","Descrição xxxxxxDescrição xxxxxx Descrição xxxxxx","Rate: 5","R$: 19,40",1, R.drawable.burger_loader);
-        this.produtos.add(p);
-
-        p = new Produto("Comida 2 xxxx","Descrição xxxxxxDescrição xxxxxx Descrição xxxxxx","Rate: 4","R$: 29,40",1, R.drawable.burger_loader);
-        this.produtos.add(p);
-
-        p = new Produto("Comida 3 xxxx","Descrição xxxxxxDescrição xxxxxx Descrição xxxxxx","Rate: 5","R$: 39,40",1, R.drawable.burger_loader);
-        this.produtos.add(p);
-
-        p = new Produto("Comida 4 xxxx","Descrição xxxxxxDescrição xxxxxx Descrição xxxxxx","Rate: 3","R$: 49,40",1, R.drawable.burger_loader);
-        this.produtos.add(p);
-
-        p = new Produto("Comida 5 xxxx","Descrição xxxxxxDescrição xxxxxx Descrição xxxxxx","Rate: 2","R$: 12,50",1, R.drawable.burger_loader);
-        this.produtos.add(p);
-
-        p = new Produto("Comida 6 xxxx","Descrição xxxxxxDescrição xxxxxx Descrição xxxxxx","Rate: 5","R$: 30,40",1, R.drawable.burger_loader);
-        this.produtos.add(p);
-
-        p = new Produto("Comida 7 xxxx","Descrição xxxxxxDescrição xxxxxx Descrição xxxxxx","Rate: 4","R$: 9,90",1, R.drawable.burger_loader);
-        this.produtos.add(p);
-
-        p = new Produto("Comida 8 xxxx","Descrição xxxxxxDescrição xxxxxx Descrição xxxxxx","Rate: 6","R$: 60,00",1, R.drawable.burger_loader);
-        this.produtos.add(p);
-
-        p = new Produto("Comida 9 xxxx","Descrição xxxxxxDescrição xxxxxx Descrição xxxxxx","Rate: 9","R$: 40,40",1, R.drawable.burger_loader);
-        this.produtos.add(p);
-
-         */
-
-
-    }
-
 
 
     public void positionAction(@NotNull View itemView) {
@@ -754,12 +645,75 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
 
         valorPedidos.setText("TOTAL: \nR$: " + valorTotal);
 
-        Intent intent = new Intent(this, MainActivityCarrinho.class);
+        //Intent intent = new Intent(this, MainActivityCarrinho.class);
 
-        intent.putExtra("nome","Arnaldo A.");
+        //intent.putExtra("nome","Arnaldo A.");
 
 
     }
+
+    public void categorias(View view){
+
+        ApiService apiService = ApiCliente.getClient().create(ApiService.class);
+
+
+        // setup the alert builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Selecione uma categoria");
+
+        // add a list
+        String[] categorias = {"Todas comidas", "Burgues", "bbqs", "best-foods ", "desserts", "drinks", "fried-chicken","ice-cream","pizzas","porks","sandwiches","sausages ","steaks"};
+        builder.setItems(categorias, new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+
+                    case 0: // Todas comidas
+                        Call<List<Comidas>> call = apiService.getComidas();
+                    case 1:
+                        //Call<List<Comidas>> call = apiService.getComidas();
+                    case 2:
+
+                    case 3:
+
+                    case 4:
+
+                    case 5:
+
+                    case 6:
+
+                    case 7:
+                        //Call<List<Comidas>> call = apiService.getIceCream();
+                    case 8:
+
+                    case 9:
+
+                    case 10:
+
+                    case 11:
+
+                    case 12:
+
+
+
+
+
+
+                    default:
+                        listaAPI = 200;
+                }
+            }
+        });
+
+// create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        builder.show();
+
+
+    }
+
+
+
 
 
 
