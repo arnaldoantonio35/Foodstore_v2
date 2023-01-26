@@ -1,6 +1,9 @@
 package com.example.foodstore_maisquedelivery.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.icu.text.DecimalFormat;
 import android.icu.text.Transliterator;
 import android.view.LayoutInflater;
@@ -15,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.foodstore_maisquedelivery.MainActivity;
+import com.example.foodstore_maisquedelivery.MainActivityCarrinho;
 import com.example.foodstore_maisquedelivery.R;
 import com.example.foodstore_maisquedelivery.model.Comidas;
 import com.example.foodstore_maisquedelivery.model.PedidoFeito;
@@ -31,10 +36,22 @@ public class PedidoFeitoAdapter extends RecyclerView.Adapter<PedidoFeitoAdapter.
     int NovaPosicao;
     int buffer;
 
+    private SQLiteDatabase bancoDados;
+
+    double valorItem = 0;
+
+    double valorTodosItens;
+
+    double aux;
+
+    int entrou = 0;
+
     Context context;
     List<PedidoFeito> listaPedidosfeitos;
 
     int quant1;
+
+    double valorTotal;
 
     public PedidoFeitoAdapter(Context context, List<PedidoFeito> listaPedidosfeitos){
         this.context = context;
@@ -62,6 +79,8 @@ public class PedidoFeitoAdapter extends RecyclerView.Adapter<PedidoFeitoAdapter.
     @Override
     public void onBindViewHolder(PedidoFeitoAdapter.MyViewHolder holder, int position) {
 
+        entrou++;
+
         PedidoFeito pedidoFeito = listaPedidosfeitos.get(position);
 
         holder.nomePedido.setText(pedidoFeito.getName());
@@ -81,7 +100,8 @@ public class PedidoFeitoAdapter extends RecyclerView.Adapter<PedidoFeitoAdapter.
 
         String vlr2 = String.valueOf(pedidoFeito.getPrice());
 
-        Double valorItem = pedidoFeito.getPrice() * pedidoFeito.getQuantidade();
+        valorItem = pedidoFeito.getPrice() * pedidoFeito.getQuantidade();
+
 
         DecimalFormat df = new DecimalFormat("0.00"); //deixar com duas casas decimais
 
@@ -89,11 +109,6 @@ public class PedidoFeitoAdapter extends RecyclerView.Adapter<PedidoFeitoAdapter.
 
         holder.valorPedido.setText("R$: " + vlr2);
 
-
-
-        pedidoFeito.setPriceTotal(valorItem);
-
-        System.out.println("Valor total Price: " + pedidoFeito.getPriceTotal());
 
         holder.valorItemPedido.setText("R$: " + valorItemString);
 
@@ -103,8 +118,24 @@ public class PedidoFeitoAdapter extends RecyclerView.Adapter<PedidoFeitoAdapter.
 
         holder.position = position;
 
+        //System.out.println("Posição: " + position);
 
-        System.out.println("Posição: " + position);
+
+        aux = valorItem;
+
+        pedidoFeito.setPriceTotal(valorItem);
+
+        //position = position + 1;
+
+        //System.out.println("pedidoFeito.getPriceTotal: " + pedidoFeito.getPriceTotal() + " / Posição: "+ position);
+
+        //System.out.println("Valor total Price: " + pedidoFeito.getPriceTotal());
+
+
+
+        valorTotalSomado(pedidoFeito);
+
+        System.out.println("Entrou:" + entrou);
 
 
         /*
@@ -135,6 +166,16 @@ public class PedidoFeitoAdapter extends RecyclerView.Adapter<PedidoFeitoAdapter.
 
     }
 
+    public void valorTotalSomado(PedidoFeito pedidoFeito){
+
+
+        valorTodosItens = pedidoFeito.getPriceTotal();
+
+        System.out.println("ValorTodosItens: " + valorTodosItens);
+
+
+    }
+
     @Override
     public int getItemCount() {
         if(listaPedidosfeitos != null){
@@ -143,6 +184,7 @@ public class PedidoFeitoAdapter extends RecyclerView.Adapter<PedidoFeitoAdapter.
         return 0;
 
     }
+
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
@@ -157,6 +199,8 @@ public class PedidoFeitoAdapter extends RecyclerView.Adapter<PedidoFeitoAdapter.
         ImageView imagemPedido;
         TextView valorItemPedido;
         int position;
+
+
 
 
 
@@ -176,6 +220,7 @@ public class PedidoFeitoAdapter extends RecyclerView.Adapter<PedidoFeitoAdapter.
             valorItemPedido = itemView.findViewById(R.id.valor_total_item);
 
             quantidade = position;
+
 
 
             itemView.findViewById(R.id.botao_mais).setOnClickListener(new View.OnClickListener() {
@@ -214,6 +259,9 @@ public class PedidoFeitoAdapter extends RecyclerView.Adapter<PedidoFeitoAdapter.
 
         }
     }
+
+
+
 
 
 }

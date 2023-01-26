@@ -593,12 +593,21 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
         Intent intent = new Intent(this, MainActivityCarrinho.class);
        //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 
+
+
         intent.putExtra("pedidos",listaPedidosfeitos);
 
-        intent.putExtra("valorTotal",valorTotal);
+
+        //intent.putExtra("valorTotal",valorTotal);
+
+        //intent.putExtra("valorTotal", pedidoFeito.getPrice());
+
+        intent.putExtra("valorTotal",2.0);
 
         startActivity(intent);
     }
+
+
 
 
     public void enviarValor(View view){
