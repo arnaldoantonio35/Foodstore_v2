@@ -104,7 +104,6 @@ public class PedidoFeitoAdapter extends RecyclerView.Adapter<PedidoFeitoAdapter.
         holder.position = position;
 
 
-
         System.out.println("Posição: " + position);
 
 
@@ -187,31 +186,6 @@ public class PedidoFeitoAdapter extends RecyclerView.Adapter<PedidoFeitoAdapter.
 
                     pedidoFeito.setAdicionaItem(1);
 
-                    /*
-
-                    if(pedidoFeito.getQuantidade() == 1){
-                        quantidade = 2;
-                    }
-
-                    if(position != buffer) {
-                        quantidade = 0;
-                        if(quantidade == 0 )
-                            quantidade++;
-                    }
-
-                    if(quantidade < 0){
-                        quantidade = 0;
-                    }
-
-                    System.out.println("quantidade:" + quantidade);
-
-                    pedidoFeito.setQuantidade(quantidade++);
-
-                        System.out.println("Botao mais acionado na posicão: " + position + " Valor: " + listaPedidosfeitos.get(position).getQuantidade());
-
-                    buffer = position;
-
-                     */
                     notifyDataSetChanged();
 
 
