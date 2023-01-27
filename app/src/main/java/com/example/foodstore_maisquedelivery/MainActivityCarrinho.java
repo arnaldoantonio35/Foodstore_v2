@@ -32,7 +32,7 @@ public class MainActivityCarrinho extends AppCompatActivity {
     private TextView textNome;
     private TextView textIdade;
     private TextView textEmail;
-        private String nomeTexto;
+    private String nomeTexto;
 
 
     private TextView valorBotaoTotal;
@@ -84,45 +84,12 @@ public class MainActivityCarrinho extends AppCompatActivity {
 
             System.out.println("Id: " + pedidoFeito.getId());
 
-                        /*
-                        System.out.println("Numero: " + i);
-                        System.out.println("\nNome: " + pedidoFeito.getName());
-
-                        nomeTexto = pedidoFeito.getName();
-
-                        System.out.println("Id: " + pedidoFeito.getId());
-                        System.out.println("Desc: " + pedidoFeito.getDsc());
-                        System.out.println("Preço: " + pedidoFeito.getPrice());
-                        System.out.println("Rate: " + pedidoFeito.getRate());
-                        System.out.println("Imagem: " + pedidoFeito.getImg());
-
-                         */
-
-
-            //System.out.println(postagemBBQS.getId());
-
-            //System.out.println("Produto: "+ p);
 
         }
 
 
-        //////////////////////////////////////////////
-        //textNome = findViewById(R.id.valor_nome);
-        //textIdade = findViewById(R.id.valor_valor);
-        //textEmail = findViewById(R.id.email_valor);
-
-
 
         valorBotaoTotal = findViewById(R.id.botao_Pagar);
-
-
-        //recuperar os valores na proxima tela(activity)
-
-        //PedidoFeito pedidoFeito = (PedidoFeito) listaPedidosfeitos;
-
-        //pedidoFeito.getPriceTotal();
-
-        //System.out.println("PEDIDO TOTAL: " + pedidoFeito.getPriceTotal());
 
 
         Bundle dados = getIntent().getExtras();
@@ -137,33 +104,6 @@ public class MainActivityCarrinho extends AppCompatActivity {
             valorBotaoTotal.setText("PAGAR - " + quantidadeDeItens + " item");
         }
 
-
-
-
-
-
-        //valorBotaoTotal.setText("PAGAR R$: " + pedidoFeito.getPriceTotal());
-
-        //String nome = dados.getString("nome");
-        //int idade = dados.getInt("idade");
-
-
-        //valorBotaoTotal.setText(valorTotal);
-
-        //Usuario usuario = (Usuario) dados.getSerializable("objeto");
-
-
-        //configurar valores
-
-        //textNome.setText(nome);
-        //textIdade.setText(String.valueOf(idade));
-
-        //textNome.setText(usuario.getNome());
-        //textIdade.setText(usuario.getIdade());
-        //textEmail.setText(usuario.getEmail());
-
-
-        //textIdade.setText(usuario.getIdade());
 
 
     }
@@ -290,17 +230,11 @@ public class MainActivityCarrinho extends AppCompatActivity {
 
     public void salvaEmBanco() {
 
-        //listaPedidosfeitos = (ArrayList<PedidoFeito>) getIntent().getSerializableExtra("pedidos");
-
-
-       // PedidoFeito pedidoFeito = new PedidoFeito("","","","",1,"1",2,0,0,0);
 
         try {
 
 
             //bancoDados = openOrCreateDatabase("app", MODE_PRIVATE, null);
-
-
 
             //criar ou abrir o banco
             bancoDados = openOrCreateDatabase("app", MODE_PRIVATE, null);
@@ -367,21 +301,6 @@ public class MainActivityCarrinho extends AppCompatActivity {
                 }while(cursor.moveToNext());
             }
 
-            /*
-            while (cursor != null && cursor.moveToFirst()) {
-
-                System.out.println("Resultado ID:  " + cursor.getString(indiceID));
-                System.out.println("Resultado Nome: " + cursor.getString(indiceNome));
-                System.out.println("Resultado Quantidade: " + cursor.getString(indiceQuantidade));
-                System.out.println("Resultado Valor: " + cursor.getString(indiceValor));
-                System.out.println("Resultado ValorTotal: " + cursor.getString(indiceValorTotal));
-
-
-                cursor.moveToNext();
-
-            }
-
-             */
 
 
         } catch (Exception e) {
@@ -441,78 +360,8 @@ public class MainActivityCarrinho extends AppCompatActivity {
                     System.out.println("Resultado ValorTotal: " + cursor.getString(indiceValorTotal));
 
 
-
-
-
-                    alertadiagPedidos.setMessage(
-
-                            "Id do pedido: " + cursor.getString(indiceID) + "\n" +
-                                    "Nome do pedido: " + cursor.getString(indiceNome) + "\n" +
-                                    "Quantidade: " + cursor.getString(indiceQuantidade) + "\n" +
-                                    "Valor unitario:" + cursor.getString(indiceValor) + "\n" +
-                                    "Valor total " + cursor.getString(indiceValorTotal)
-
-
-                    );
-
-
                 }while(cursor.moveToNext());
             }
-
-            /*
-            while (cursor != null && cursor.moveToFirst()) {
-
-                System.out.println("Resultado ID:  " + cursor.getString(indiceID));
-                System.out.println("Resultado Nome: " + cursor.getString(indiceNome));
-                System.out.println("Resultado Quantidade: " + cursor.getString(indiceQuantidade));
-                System.out.println("Resultado Valor: " + cursor.getString(indiceValor));
-                System.out.println("Resultado ValorTotal: " + cursor.getString(indiceValorTotal));
-
-
-                cursor.moveToNext();
-
-            }
-
-             */
-
-            /*
-            AlertDialog.Builder alertadiagPedidos = new AlertDialog.Builder(this);
-
-            alertadiagPedidos.setTitle("Detalhes do produto:");
-
-            alertadiagPedidos.setMessage(
-
-                            "Id do pedido: " + cursor.getString(indiceID) + "\n" +
-                            "Nome do pedido: " + cursor.getString(indiceNome) + "\n" +
-                            "Quantidade: " + cursor.getString(indiceQuantidade) + "\n" +
-                            "Valor unitario:" + cursor.getString(indiceValor) + "\n" +
-                            "Valor total " + cursor.getString(indiceValorTotal)
-
-
-            );
-
-             */
-
-            alertadiagPedidos.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    System.out.println("Sim acionado");
-
-                    Toast.makeText(getApplicationContext(), "Banco fechado", Toast.LENGTH_LONG).show();
-                }
-            });
-
-            alertadiagPedidos.setNegativeButton("Não", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    System.out.println("Não acionado");
-                    Toast.makeText(getApplicationContext(), "Tudo bem, escolha outro item!", Toast.LENGTH_SHORT).show();
-
-                }
-            });
-
-            alertadiagPedidos.create();
-            alertadiagPedidos.show();
 
 
 

@@ -138,32 +138,6 @@ public class PedidoFeitoAdapter extends RecyclerView.Adapter<PedidoFeitoAdapter.
         System.out.println("Entrou:" + entrou);
 
 
-        /*
-
-        holder.nomeProduto.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View itemView) {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
-                alertDialog.setTitle("Your title");
-                alertDialog.setMessage("your message ");
-                alertDialog.setPositiveButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                alertDialog.setNegativeButton("YES", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        // DO SOMETHING HERE
-
-                    }
-        })
-
-         */
-
     }
 
     public void valorTotalSomado(PedidoFeito pedidoFeito){

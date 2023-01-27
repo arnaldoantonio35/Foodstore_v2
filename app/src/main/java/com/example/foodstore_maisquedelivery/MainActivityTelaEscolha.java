@@ -504,8 +504,6 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
 
 
         alertadd.show();
-        //alertadd.setPositiveButton(AlertDialog.BUTTON_POSITIVE).setTextColor();
-
 
 
     }
@@ -583,24 +581,6 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
 
     }
 
-    public void pepararPedidos(){
-
-        /*
-
-        PedidoFeito comidasSelecionada = new PedidoFeito("""""")
-
-        PedidoFeito p = new PedidoFeito("id", "img",comidasSelecionada.getName(),comidasSelecionada.getDsc(),comidasSelecionada.getPrice(),comidasSelecionada.getRate(),1);
-        this.pedidoFeito.add(p);
-
-        p = new PedidoFeito("id", "img",comidasSelecionada.getName(),comidasSelecionada.getDsc(),comidasSelecionada.getPrice(),comidasSelecionada.getRate(),1);
-        this.postagens.add(p);
-
-         */
-
-
-
-
-    }
 
 
     public void positionAction(@NotNull View itemView) {
@@ -614,47 +594,14 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
         Intent intent = new Intent(this, MainActivityCarrinho.class);
        //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 
-
-
         intent.putExtra("pedidos",listaPedidosfeitos);
 
-
-        //intent.putExtra("valorTotal",valorTotal);
-
-        //intent.putExtra("valorTotal", pedidoFeito.getPrice());
 
         System.out.println("lista pedidos size: " + listaPedidosfeitos.size());
 
         intent.putExtra("valorTotal",listaPedidosfeitos.size());
 
         startActivity(intent);
-    }
-
-
-
-
-    public void enviarValor(View view){
-
-        //Comidas comidasSelecionada = listaComidas.get(position);
-
-        //Instanciar o objeto
-        Usuario usuario = new Usuario("Arnaldinho","arnaldoantonio","23");
-
-        //PedidoFeito pedidoFeito = new PedidoFeito("id", "img",comidasSelecionada.getName(),comidasSelecionada.getDsc(),comidasSelecionada.getPrice(),comidasSelecionada.getRate(),1);
-
-
-        Intent intent = new Intent(this, MainActivityCarrinho.class);
-
-        intent.putExtra("nome","Arnaldo A.");
-        intent.putExtra("idade",23);
-
-        intent.putExtra("objeto", usuario);
-
-        //intent.putExtra(String.valueOf(pedidoFeito), 55);
-
-        startActivity(intent);
-
-
     }
 
     public void chamaQuantidade(int tamanho){
@@ -756,13 +703,6 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
             finish();
         }
     }
-
-
-
-
-
-
-
 
 
 
