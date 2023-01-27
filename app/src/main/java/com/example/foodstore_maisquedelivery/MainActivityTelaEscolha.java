@@ -730,7 +730,6 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
 
 
 
-
                     default:
                         listaAPI = 200;
                 }
