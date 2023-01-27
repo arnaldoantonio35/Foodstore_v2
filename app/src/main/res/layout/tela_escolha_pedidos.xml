@@ -189,7 +189,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
-                    android:text=""
+                    android:text="Bem vindo, User!"
                     android:backgroundTint="#FF0000"
 
 
@@ -201,7 +201,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:layout_marginStart="40dp"
-                    android:text=""
+                    android:text="O carrinho\nestá vazio. "
                     android:backgroundTint="#FF0000"
 
 

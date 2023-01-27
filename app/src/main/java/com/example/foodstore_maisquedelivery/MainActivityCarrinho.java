@@ -1,5 +1,6 @@
 package com.example.foodstore_maisquedelivery;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -48,6 +49,8 @@ public class MainActivityCarrinho extends AppCompatActivity {
     private PedidoFeitoAdapter pedidoFeitoAdapter;
 
     double valorTotal;
+
+    int quantidadeDeItens;
 
     private SQLiteDatabase bancoDados;
 
@@ -126,11 +129,20 @@ public class MainActivityCarrinho extends AppCompatActivity {
 
         Bundle dados = getIntent().getExtras();
 
-        valorTotal = dados.getDouble("valorTotal");
+        quantidadeDeItens = dados.getInt("valorTotal");
 
-        System.out.println("valor total carrinho: " + valorTotal);
+        System.out.println("valor total carrinho: " + quantidadeDeItens);
 
-        valorBotaoTotal.setText("PAGAR R$: " + valorTotal);
+        if(quantidadeDeItens > 1){
+            valorBotaoTotal.setText("PAGAR - " + quantidadeDeItens + " itens");
+        }else{
+            valorBotaoTotal.setText("PAGAR - " + quantidadeDeItens + " item");
+        }
+
+
+
+
+
 
         //valorBotaoTotal.setText("PAGAR R$: " + pedidoFeito.getPriceTotal());
 
@@ -167,16 +179,113 @@ public class MainActivityCarrinho extends AppCompatActivity {
 
     }
 
-    public void telaPagamento(View view){
+    public void telaPagamento(View view){//botão pagar
 
-        salvaEmBanco();
 
-        System.out.println("Entrou no metodo tela pagamento");
+        if(quantidadeDeItens >= 1) {
 
-        Intent intent = new Intent(this, MainActivityPagamento.class);
+            AlertDialog.Builder alertConfirmar = new AlertDialog.Builder(this);
+
+            alertConfirmar.setTitle("Confimação de pedidos");
+
+            alertConfirmar.setMessage("Confirma os itens selecionados?" +
+
+                     "\n\n Total de: " + quantidadeDeItens + " itens no carrinho." +
+                            "\n\n Deseja finalizar a compra?"
+
+                    );
+
+            System.out.println("Entrou no metodo tela pagamento");
+
+            Intent intent = new Intent(this, MainActivityPagamento.class);
+
+            alertConfirmar.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    System.out.println("Compra finalizada");
+
+                    startActivity(intent);
+                }
+            });
+
+            alertConfirmar.create();
+            alertConfirmar.show();
+
+
+            salvaEmBanco();
+
+
+
+
+
+        }else{
+
+            AlertDialog.Builder alertaZeroItens = new AlertDialog.Builder(this);
+
+            alertaZeroItens.setTitle("CARRINHO VAZIO :(");
+
+            alertaZeroItens.setMessage("O carrinho está vazio, deseja adicionar algum item?\n" +
+                                        "Toque em confirmar para escolher algum item."
+            );
+
+            alertaZeroItens.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    System.out.println("Toast carrinho vazio, voltou a tela de escolha");
+                    onBackPressed();
+
+                }
+            });
+
+            alertaZeroItens.create();
+            alertaZeroItens.show();
+
+
+
+        }
+
+    }
+
+    public void onBackPressed() {
+
+        Intent intent = new Intent(this, MainActivityTelaEscolha.class);
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        if(quantidadeDeItens >= 1) {
+
+            android.app.AlertDialog.Builder AlertVoltar = new android.app.AlertDialog.Builder(this);
+
+            AlertVoltar.setTitle("Atenção");
+
+            AlertVoltar.setMessage("Deseja voltar e manter os itens no carrinho?\n\n" +
+                    "Se sim, toque em 'MANTER'.\n\nSenão, toque em VOLTAR.");
+
+            AlertVoltar.setPositiveButton("Manter", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    Toast.makeText(getApplicationContext(), "É possivel voltar e manter os itens indo no icone 'HOME'\n no canto superior direito.", Toast.LENGTH_LONG).show();
+
+                    finish();
+                }
+            });
+            AlertVoltar.setNegativeButton("Voltar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+
+                    startActivity(intent);
+
+                }
+            });
+
+            AlertVoltar.create();
+            AlertVoltar.show();
+
+        }else{
 
         startActivity(intent);
-
+        }
     }
 
 
@@ -285,12 +394,18 @@ public class MainActivityCarrinho extends AppCompatActivity {
 
     }
 
+    public void botaoPedidosfeitos(View view){
 
-    public void meusPedidosFeitos(View view){
+        meusPedidosFeitos();
+
+    }
+
+
+    public void meusPedidosFeitos(){
 
         System.out.println("Entrou no metodo da tela de pedidos");
 
-        Intent intent = new Intent(this, MainActivityMeusPedidos.class);
+        Intent intent = new Intent(MainActivityCarrinho.this, MainActivityMeusPedidos.class);
 
         startActivity(intent);
 

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -90,8 +92,12 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
 
     int listaAPI;
 
+    int contavolta;
+
     ImageView imagemAlert;
     TextView textoNomeItemAlert;
+
+    Button botaoMeusPedidos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +106,8 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
         System.out.println("Tela_escolha_pedidos");
 
         //////////////////////////////////////////////////////////////////////////
+
+
 
         listaComidas = new ArrayList<>();
         recyclerProduto = (RecyclerView)findViewById(R.id.recycler_Produto);
@@ -355,6 +363,19 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
 
          */
 
+        final Button button = (Button) findViewById(R.id.button_pedidos);
+        button.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+
+                System.out.println("Entrou no metodo da tela de pedidos");
+
+                Intent intent = new Intent(MainActivityTelaEscolha.this, MainActivityMeusPedidos.class);
+
+                startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -602,7 +623,9 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
 
         //intent.putExtra("valorTotal", pedidoFeito.getPrice());
 
-        intent.putExtra("valorTotal",2.0);
+        System.out.println("lista pedidos size: " + listaPedidosfeitos.size());
+
+        intent.putExtra("valorTotal",listaPedidosfeitos.size());
 
         startActivity(intent);
     }
@@ -720,6 +743,23 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
 
 
     }
+
+    public void onBackPressed() {
+
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        startActivity(intent);
+
+        contavolta++;
+
+        if(contavolta > 1){
+            finish();
+        }
+    }
+
+
+
 
 
 
