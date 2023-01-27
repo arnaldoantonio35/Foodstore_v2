@@ -32,9 +32,7 @@ public class MainActivityCarrinho extends AppCompatActivity {
     private TextView textNome;
     private TextView textIdade;
     private TextView textEmail;
-
-
-    private String nomeTexto;
+        private String nomeTexto;
 
 
     private TextView valorBotaoTotal;
@@ -442,6 +440,10 @@ public class MainActivityCarrinho extends AppCompatActivity {
                     System.out.println("Resultado Valor: " + cursor.getString(indiceValor));
                     System.out.println("Resultado ValorTotal: " + cursor.getString(indiceValorTotal));
 
+
+
+
+
                     alertadiagPedidos.setMessage(
 
                             "Id do pedido: " + cursor.getString(indiceID) + "\n" +
@@ -528,32 +530,7 @@ public class MainActivityCarrinho extends AppCompatActivity {
 
 
 
-
-
-
     }
-
-
-
-
-
-
-
-    /*
-
-    public void chamaValorTotal(){
-
-        TextView pagarValor = findViewById(R.id.botao_Pagar);
-
-        pagarValor.setText("PAGAR R$: "+ valorTotal);
-
-    }
-
-     */
-
-
-
-
 
 
 

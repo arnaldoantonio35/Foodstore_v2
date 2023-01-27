@@ -181,7 +181,7 @@ public class MainActivityTelaEscolha extends AppCompatActivity {//MAIN
                 Log.d("TAG","Response = "+t.toString());
                 System.out.println("API sem resposta... checar a rede.");
 
-               chamaTextSemRede();
+               //chamaTextSemRede();
 
             }
 

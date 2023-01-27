@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:background="@drawable/bordas_meus_pedidos"
+
+
+        >
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="COMPROVANTE DE COMPRA/PEDIDO"
+                android:textSize="15sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+
+                />
+
+            <TextView
+                android:id="@+id/id_produto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ID de compra"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                />
+
+
+            <TextView
+                android:id="@+id/nome_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome pedido"
+                android:textSize="17sp"
+                android:textStyle="bold"
+
+                android:layout_marginLeft="10dp"
+
+                />
+
+
+
+            <TextView
+                android:id="@+id/quantidade_pedido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="QTD: 2"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
+                >
+
+                <TextView
+                    android:id="@+id/valor_und"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="UND R$: 10,15"
+                    android:fontFamily="sans-serif-light"
+                    android:textStyle="bold|italic"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="10dp"
+
+
+                    />
+
+                <TextView
+                    android:id="@+id/valor_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TOTAL R$: 20,30"
+                    android:fontFamily="sans-serif-light"
+                    android:textStyle="bold|italic"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="10dp"
+
+
+                    />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+
+</androidx.cardview.widget.CardView>
