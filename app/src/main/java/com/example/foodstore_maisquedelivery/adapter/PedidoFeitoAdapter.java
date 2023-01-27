@@ -211,8 +211,6 @@ public class PedidoFeitoAdapter extends RecyclerView.Adapter<PedidoFeitoAdapter.
                     }
 
 
-
-
             });
 
             itemView.findViewById(R.id.botao_menos).setOnClickListener(new View.OnClickListener() {
